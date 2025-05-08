@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thein Naing Oo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+        .dark {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .light {
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        /* Updated Navigation Styles */
+        nav {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dark nav {
+            background-color: rgba(17, 24, 39, 0.95) !important;
+        }
+        /* Hero Section with Background */
+        #home {
+            background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            /* //url('img/bg1.jpg'); */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(243, 153, 119, 0.9), rgba(243, 153, 119, 0));
+            z-index: 1;
+        }
+        #home > * {
+            position: relative;
+            z-index: 2;
+        }
+        /* Profile Photo Styles */
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+        /* Updated Color Scheme */
+        .text-primary {
+            color: #f39977 !important;
+        }
+        .bg-primary {
+            background-color: #f39977 !important;
+        }
+        .border-primary {
+            border-color: #f39977 !important;
+        }
+        .hover\:bg-primary:hover {
+            background-color: #f5a88a !important;
+        }
+        /* Enhanced Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-left.visible,
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f39977;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .skill-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .project-card {
+            transition: transform 0.3s ease;
+        }
+        .project-card:hover {
+            transform: scale(1.02);
+        }
+        .social-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(243, 153, 119, 0.1);
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            transform: translateY(-3px);
+            background-color: rgba(243, 153, 119, 0.2);
+        }
+        .social-tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 8px;
+            background-color: #333;
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: -35px;
+        }
+        .social-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 5px 5px 5px;
+            border-style: solid;
+            border-color: transparent transparent #333 transparent;
+        }
+        .social-link-sm {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .social-link-sm:hover {
+            transform: translateY(-3px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .gallery-filter {
+            background-color: rgba(243, 153, 119, 0.1);
+            color: #f39977;
+        }
+        .gallery-filter.active {
+            background-color: #f39977;
+            color: white;
+        }
+        .gallery-item {
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item.hidden {
+            opacity: 0;
+            display: none;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 10px;
+        }
+        .gallery-item {
+            grid-row-end: span 30;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="light">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">Thein Naing Oo</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 dark:text-gray-300">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 dark:text-gray-300">About</a>
+                    <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300">Projects</a>
+                    <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300">Skills</a>
+                    <a href="photography.html" class="nav-link text-gray-600 dark:text-gray-300">Photography</a>
+                    <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
+                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 text-center fade-in">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                 alt="Profile Photo" 
+                 class="profile-photo mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">Hi, I'm <span class="text-primary">Thein Naing Oo</span></h1>
+            <p class="text-xl md:text-2xl mb-8 text-white">Full Stack Developer | UI/UX Designer | Problem Solver</p>
+            
+            <!-- Social Links -->
+            <div class="flex justify-center space-x-4 mb-8">
+                <a href="YOUR_LINKEDIN_URL" target="_blank" class="social-link-sm group">
+                    <i class="fab fa-linkedin text-xl text-white group-hover:text-[#0077B5] transition-colors"></i>
+                </a>
+                <a href="YOUR_FACEBOOK_URL" target="_blank" class="social-link-sm group">
+                    <i class="fab fa-facebook text-xl text-white group-hover:text-[#1877F2] transition-colors"></i>
+                </a>
+                <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="social-link-sm group">
+                    <i class="fab fa-whatsapp text-xl text-white group-hover:text-[#25D366] transition-colors"></i>
+                </a>
+                <a href="YOUR_LINE_URL" target="_blank" class="social-link-sm group">
+                    <i class="fab fa-line text-xl text-white group-hover:text-[#00B900] transition-colors"></i>
+                </a>
+                <a href="YOUR_INSTAGRAM_URL" target="_blank" class="social-link-sm group">
+                    <i class="fab fa-instagram text-xl text-white group-hover:text-[#E4405F] transition-colors"></i>
+                </a>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#projects" class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
+                    <i class="fas fa-code mr-2"></i>
+                    View Projects
+                </a>
+                <a href="photography.html" class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
+                    <i class="fas fa-camera mr-2"></i>
+                    View Gallery
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-primary transition-colors flex items-center justify-center">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Contact Me
+                </a>
+                <div class="relative group">
+                    <button class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center">
+                        <i class="fas fa-file-alt mr-2"></i>
+                        Resume
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <a href="YOUR_RESUME_PDF_URL" target="_blank" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">
+                            <i class="fas fa-eye mr-2"></i>
+                            View Resume
+                        </a>
+                        <a href="YOUR_RESUME_PDF_URL" download class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-lg">
+                            <i class="fas fa-download mr-2"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">About Me</h2>
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                    I'm a passionate developer with a strong foundation in web development and design. 
+                    I love creating beautiful, functional, and user-friendly applications that solve real-world problems.
+                </p>
+                <p class="text-lg text-gray-600 dark:text-gray-300">
+                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
+                    or enjoying outdoor activities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employment History Section -->
+    <section id="experience" class="py-20 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Work Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary"></div>
+
+                    <!-- Timeline Item 1 -->
+                    <div class="relative mb-12 fade-in">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Senior Developer</h3>
+                                <p class="text-primary font-semibold">Company Name</p>
+                                <p class="text-gray-600 dark:text-gray-300">2022 - Present</p>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="w-1/2 pl-8">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+                                        <li>Led development of key features and improvements</li>
+                                        <li>Mentored junior developers and conducted code reviews</li>
+                                        <li>Implemented best practices and coding standards</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="relative mb-12 fade-in">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+                                        <li>Developed and maintained multiple web applications</li>
+                                        <li>Collaborated with cross-functional teams</li>
+                                        <li>Optimized application performance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="w-1/2 pl-8">
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Web Developer</h3>
+                                <p class="text-primary font-semibold">Previous Company</p>
+                                <p class="text-gray-600 dark:text-gray-300">2020 - 2022</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="relative fade-in">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Junior Developer</h3>
+                                <p class="text-primary font-semibold">First Company</p>
+                                <p class="text-gray-600 dark:text-gray-300">2018 - 2020</p>
+                            </div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="w-1/2 pl-8">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+                                        <li>Assisted in developing and maintaining websites</li>
+                                        <li>Learned and implemented new technologies</li>
+                                        <li>Participated in team projects and meetings</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
+                    <img src="https://placehold.co/600x400" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">React</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Node.js</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm">MongoDB</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
+                    <img src="https://placehold.co/600x400" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Vue.js</span>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">Firebase</span>
+                            <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm">Tailwind</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
+                    <img src="https://placehold.co/600x400" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Python</span>
+                            <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Django</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">PostgreSQL</span>
+                        </div>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">View Project →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Skills & Technologies</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Skill Card 1 -->
+                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                    <i class="fab fa-html5 text-4xl text-orange-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">HTML5</h3>
+                </div>
+
+                <!-- Skill Card 2 -->
+                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">CSS3</h3>
+                </div>
+
+                <!-- Skill Card 3 -->
+                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                    <i class="fab fa-js text-4xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">JavaScript</h3>
+                </div>
+
+                <!-- Skill Card 4 -->
+                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                    <i class="fab fa-react text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">React</h3>
+                </div>
+
+                <!-- Add more skill cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get In Touch</h2>
+            <div class="max-w-2xl mx-auto">
+                <form class="space-y-6 fade-in">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-900 py-8">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <!-- LinkedIn -->
+                <a href="YOUR_LINKEDIN_URL" target="_blank" class="social-link group">
+                    <i class="fab fa-linkedin text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#0077B5] transition-colors"></i>
+                    <span class="social-tooltip">LinkedIn</span>
+                </a>
+                <!-- Facebook -->
+                <a href="YOUR_FACEBOOK_URL" target="_blank" class="social-link group">
+                    <i class="fab fa-facebook text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#1877F2] transition-colors"></i>
+                    <span class="social-tooltip">Facebook</span>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="social-link group">
+                    <i class="fab fa-whatsapp text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#25D366] transition-colors"></i>
+                    <span class="social-tooltip">WhatsApp</span>
+                </a>
+                <!-- LINE -->
+                <a href="YOUR_LINE_URL" target="_blank" class="social-link group">
+                    <i class="fab fa-line text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#00B900] transition-colors"></i>
+                    <span class="social-tooltip">LINE</span>
+                </a>
+                <!-- Instagram -->
+                <a href="YOUR_INSTAGRAM_URL" target="_blank" class="social-link group">
+                    <i class="fab fa-instagram text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#E4405F] transition-colors"></i>
+                    <span class="social-tooltip">Instagram</span>
+                </a>
+            </div>
+            <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Thein Naing Oo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            body.classList.toggle('light');
+        });
+
+        // Enhanced Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Add staggered animation delay for timeline items
+                    if (entry.target.classList.contains('timeline-item')) {
+                        const delay = entry.target.dataset.delay || 0;
+                        entry.target.style.transitionDelay = `${delay}s`;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery Filter
+            const filters = document.querySelectorAll('.gallery-filter');
+            const items = document.querySelectorAll('.gallery-item');
+
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    // Remove active class from all filters
+                    filters.forEach(f => f.classList.remove('active'));
+                    // Add active class to clicked filter
+                    filter.classList.add('active');
+
+                    const category = filter.getAttribute('data-filter');
+
+                    items.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Initialize Masonry Layout
+            const grid = document.querySelector('.gallery-grid');
+            const masonry = new Masonry(grid, {
+                itemSelector: '.gallery-item',
+                columnWidth: '.gallery-item',
+                percentPosition: true
+            });
+
+            // Update layout after images load
+            imagesLoaded(grid).on('progress', () => {
+                masonry.layout();
+            });
+        });
+    </script>
+
+    <!-- Add these before closing body tag -->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+</body>
+</html>
