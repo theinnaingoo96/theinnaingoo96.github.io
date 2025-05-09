@@ -1,43 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thein's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         .dark {
             background-color: #1a1a1a;
             color: #ffffff;
         }
+
         .light {
             background-color: #ffffff;
             color: #1a1a1a;
         }
+
         /* Updated Navigation Styles */
         nav {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(8px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
+
         .dark nav {
-            background-color: rgba(17, 24, 39, 0.95) !important;
+            background-color: rgba(17, 24, 39, 0.6) !important;
         }
+
+        .dark .text-gray-800 {
+            color: #ffffff !important;
+        }
+
+        .dark .text-gray-600 {
+            color: #e5e7eb !important;
+        }
+
+        .dark .text-gray-300 {
+            color: #d1d5db !important;
+        }
+
         /* Hero Section with Background */
         #home {
-            /* background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); */
-            background-image: url('img/bg1.jpg');
+            background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            /* background-image: url('img/bg1.jpg'); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             position: relative;
         }
+
         #home::before {
             content: '';
             position: absolute;
@@ -48,10 +69,12 @@
             background: linear-gradient(135deg, rgba(243, 153, 119, 0.9), rgba(243, 153, 119, 0));
             z-index: 1;
         }
-        #home > * {
+
+        #home>* {
             position: relative;
             z-index: 2;
         }
+
         /* Profile Photo Styles */
         .profile-photo {
             width: 200px;
@@ -63,51 +86,63 @@
             margin-bottom: 2rem;
             transition: transform 0.3s ease;
         }
+
         .profile-photo:hover {
             transform: scale(1.05);
         }
+
         /* Updated Color Scheme */
         .text-primary {
             color: #f39977 !important;
         }
+
         .bg-primary {
             background-color: #f39977 !important;
         }
+
         .border-primary {
             border-color: #f39977 !important;
         }
+
         .hover\:bg-primary:hover {
             background-color: #f5a88a !important;
         }
+
         /* Enhanced Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
         .fade-in-left {
             opacity: 0;
             transform: translateX(-30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
+
         .fade-in-right {
             opacity: 0;
             transform: translateX(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
+
         .fade-in-left.visible,
         .fade-in-right.visible {
             opacity: 1;
             transform: translateX(0);
         }
+
         .nav-link {
             position: relative;
             font-weight: 500;
         }
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -118,22 +153,28 @@
             background-color: #f39977;
             transition: width 0.3s ease;
         }
+
         .nav-link:hover::after {
             width: 100%;
         }
+
         .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .skill-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+
         .project-card {
             transition: transform 0.3s ease;
         }
+
         .project-card:hover {
             transform: scale(1.02);
         }
+
         .social-link {
             position: relative;
             display: inline-flex;
@@ -145,10 +186,12 @@
             background-color: rgba(243, 153, 119, 0.1);
             transition: all 0.3s ease;
         }
+
         .social-link:hover {
             transform: translateY(-3px);
             background-color: rgba(243, 153, 119, 0.2);
         }
+
         .social-tooltip {
             position: absolute;
             bottom: -30px;
@@ -164,11 +207,13 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
+
         .social-link:hover .social-tooltip {
             opacity: 1;
             visibility: visible;
             bottom: -35px;
         }
+
         .social-tooltip::before {
             content: '';
             position: absolute;
@@ -179,6 +224,7 @@
             border-style: solid;
             border-color: transparent transparent #333 transparent;
         }
+
         .social-link-sm {
             position: relative;
             display: inline-flex;
@@ -190,41 +236,246 @@
             background-color: rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
         }
+
         .social-link-sm:hover {
             transform: translateY(-3px);
             background-color: rgba(255, 255, 255, 0.2);
         }
+
         .gallery-filter {
             background-color: rgba(243, 153, 119, 0.1);
             color: #f39977;
         }
+
         .gallery-filter.active {
             background-color: #f39977;
             color: white;
         }
+
         .gallery-item {
             opacity: 1;
             transition: opacity 0.3s ease;
         }
+
         .gallery-item.hidden {
             opacity: 0;
             display: none;
         }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             grid-auto-rows: 10px;
         }
+
         .gallery-item {
             grid-row-end: span 30;
         }
+
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
+        /* Skills Section with Background */
+        #skills {
+            background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        #skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.7));
+            z-index: 1;
+        }
+
+        #skills>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark #skills::before {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.85));
+        }
+
+        /* Experience Section with Background */
+        #experience {
+            background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        #experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* background: linear-gradient(135deg, rgba(243, 153, 119, 0.95), rgba(243, 153, 119, 0.85)); */
+            background: linear-gradient(135deg, rgb(141 89 69 / 95%), rgb(203 128 100 / 85%));
+            z-index: 1;
+        }
+
+        #experience>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark #experience::before {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(17, 24, 39, 0.85));
+        }
+
+        .dark .background-alt {
+            background-color: #001024;
+        }
+
+        .background-alt {
+            background-color: #fff8f8
+        }
+
+        /* Updated Timeline Styles */
+        .timeline-content {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-dot {
+            background-color: #f39977;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 4px rgba(243, 153, 119, 0.3);
+        }
+
+        .dark .timeline-dot {
+            background-color: #f39977;
+            border-color: rgba(17, 24, 39, 0.8);
+        }
+
+        /* Theme Toggle Button Styles */
+        #theme-toggle {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        #theme-toggle .theme-icon {
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover .theme-icon {
+            transform: rotate(360deg);
+        }
+
+        /* Delimiter Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+                transform: scaleX(0.95);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scaleX(1.05);
+            }
+
+            100% {
+                opacity: 0.3;
+                transform: scaleX(0.95);
+            }
+        }
+
+        .delimiter-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .delimiter-line {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .delimiter-container {
+            transition: all 0.3s ease;
+        }
+
+        .delimiter-container:hover .delimiter-icon {
+            animation-duration: 2s;
+        }
+
+        .delimiter-container:hover .delimiter-line {
+            animation-duration: 2s;
+        }
+
+        #education::before {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            display: block;
+            border: 3px dashed #f7cfc1;
+            background: #fafcfd;
+            content: '';
+        }
+
+        /* Education Section with Background */
+        /* #education {
+            background-color: #ffffff;
+            position: relative;
+        }
+
+        #education::before {
+            display: none;
+        }
+
+        #education > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dark #education {
+            background-color: #1a1a1a;
+        }
+
+        .dark #education::before {
+            display: none;
+        } */
     </style>
 </head>
+
 <body class="light">
     <!-- Navigation -->
     <nav class="fixed w-full z-50 top-0">
@@ -239,9 +490,10 @@
                     <a href="photography.html" class="nav-link text-gray-600 dark:text-gray-300">Photography</a>
                     <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
                 </div>
-                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
-                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
-                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                <button id="theme-toggle"
+                    class="p-2 rounded-lg bg-gray-200/80 dark:bg-gray-700/80 backdrop-blur-sm border border-gray-300/50 dark:border-gray-600/50">
+                    <i class="fas fa-sun theme-icon text-yellow-500 dark:hidden"></i>
+                    <i class="fas fa-moon theme-icon text-blue-300 hidden dark:block"></i>
                 </button>
             </div>
         </div>
@@ -250,12 +502,11 @@
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-20">
         <div class="container mx-auto px-6 text-center fade-in">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                 alt="Profile Photo" 
-                 class="profile-photo mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">Hi, I'm <span class="text-primary">Thein Naing Oo</span></h1>
+            <img src="img/profile.png" alt="Profile Photo" class="profile-photo mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">Hi, I'm <span class="text-primary">Thein Naing
+                    Oo</span></h1>
             <p class="text-xl md:text-2xl mb-8 text-white">Frontend Developer | UI/UX Designer | Problem Solver</p>
-            
+
             <!-- Social Links -->
             <div class="flex justify-center space-x-4 mb-8">
                 <a href="https://www.linkedin.com/in/thein-naing-oo/" target="_blank" class="social-link-sm group">
@@ -276,33 +527,40 @@
             </div>
 
             <!-- Action Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#projects" class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 pb-3">
+                <a href="#projects"
+                    class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
                     <i class="fas fa-code mr-2"></i>
                     View Projects
                 </a>
-                <a href="photography.html" class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
+                <a href="photography.html"
+                    class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center">
                     <i class="fas fa-camera mr-2"></i>
                     View Gallery
                 </a>
-                <a href="#contact" class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-primary transition-colors flex items-center justify-center">
+                <a href="#contact"
+                    class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-primary transition-colors flex items-center justify-center">
                     <i class="fas fa-envelope mr-2"></i>
                     Contact Me
                 </a>
-                <div class="relative group">
-                    <button class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center">
+                <div class="relative group flex items-center justify-center">
+                    <button
+                        class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center">
                         <i class="fas fa-file-alt mr-2"></i>
                         Resume
                         <i class="fas fa-chevron-down ml-2 text-sm"></i>
                     </button>
-                    <div class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <a href="YOUR_RESUME_PDF_URL" target="_blank" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">
+                    <div
+                        class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        <a href="disc/resume.pdf" target="_blank"
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">
                             <i class="fas fa-eye mr-2"></i>
-                            View Resume
+                            View
                         </a>
-                        <a href="YOUR_RESUME_PDF_URL" download class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-lg">
+                        <a href="disc/resume.pdf" download
+                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-lg">
                             <i class="fas fa-download mr-2"></i>
-                            Download PDF
+                            Download
                         </a>
                     </div>
                 </div>
@@ -311,47 +569,134 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="about" class="py-20 background-alt">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">About Me</h2>
             <div class="max-w-3xl mx-auto text-center fade-in">
                 <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                    I'm a passionate developer with a strong foundation in web development and design. 
-                    I love creating beautiful, functional, and user-friendly applications that solve real-world problems.
+                    Software Developer with proven Technical, Organizational and communication skills.
+                    Having great experience in Mobile Application Development.
+                </p>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                    Coming Up with Strong programming skills in both Web and Mobile application Development working
+                    experience with both SQL and NoSQL.
+                    Extremely passionate towards new technologies.
+                </p>
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                    Able to effectively self-manage during independent projects as well as collaborate in a team.
                 </p>
                 <p class="text-lg text-gray-600 dark:text-gray-300">
-                    When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
-                    or enjoying outdoor activities.
+                    Seeking to apply my skills for better employment and professional development opportunities.
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Employment History Section -->
-    <section id="experience" class="py-20 bg-white dark:bg-gray-800">
+    <!-- Education Background Section -->
+    <section id="education" class="py-20 background-alt" style="position: relative;">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Work Experience</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-600 dark:text-gray-300">Education Background</h2>
             <div class="max-w-4xl mx-auto">
                 <!-- Timeline -->
                 <div class="relative">
                     <!-- Timeline line -->
-                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary"></div>
+                    <div
+                        class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 dark:bg-white/30 bg-gray-300/30">
+                    </div>
+
+                    <!-- Education Item 1 -->
+                    <div class="relative mb-12 fade-in">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">Bachelor of Computer
+                                    Science</h3>
+                                <p class="text-gray-600 font-semibold">University of Computer Studies, Yangon</p>
+                                <p class="text-gray-600">2015 - 2019</p>
+                            </div>
+                            <div
+                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white/80">
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <div
+                                    class="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-md border border-white/20">
+                                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                        <li>Major in Computer Science</li>
+                                        <li>GPA: 3.8/4.0</li>
+                                        <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Web
+                                            Development</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Item 2 -->
+                    <div class="relative fade-in">
+                        <div class="flex items-center">
+                            <div class="w-1/2 pr-8 text-right">
+                                <div
+                                    class="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-md border border-white/20">
+                                    <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                        <li>High School Diploma</li>
+                                        <li>Top 10% of graduating class</li>
+                                        <li>Active member of Science Club</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div
+                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white/80">
+                            </div>
+                            <div class="w-1/2 pl-8">
+                                <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">High School Education
+                                </h3>
+                                <p class="text-gray-600 font-semibold">Basic Education High School</p>
+                                <p class="text-gray-600">2011 - 2015</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Decorative Delimiter -->
+    <!-- <div class="relative py-12 overflow-hidden delimiter-container">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-30 delimiter-line"></div>
+        </div>
+        <div class="relative flex justify-center">
+            <div class="px-6 py-2 bg-white dark:bg-gray-800 rounded-full shadow-lg delimiter-icon">
+                <i class="fas fa-briefcase text-primary text-2xl"></i>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Employment History Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Work Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline -->
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-white/30"></div>
 
                     <!-- Timeline Item 1 -->
                     <div class="relative mb-12 fade-in">
                         <div class="flex items-center">
                             <div class="w-1/2 pr-8 text-right">
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Senior Developer</h3>
-                                <p class="text-primary font-semibold">Company Name</p>
-                                <p class="text-gray-600 dark:text-gray-300">2022 - Present</p>
+                                <h3 class="text-xl font-bold text-white">Senior Developer</h3>
+                                <p class="text-white/90 font-semibold">Blue Stone Solution Co.,Ltd</p>
+                                <p class="text-white/80">Aug 2023 - Present</p>
                             </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot">
+                            </div>
                             <div class="w-1/2 pl-8">
-                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+                                <div class="timeline-content p-6 rounded-lg">
+                                    <ul class="list-disc list-inside text-white/90 space-y-2">
                                         <li>Led development of key features and improvements</li>
-                                        <li>Mentored junior developers and conducted code reviews</li>
                                         <li>Implemented best practices and coding standards</li>
+                                        <li>Make from analysis to deployment phase</li>
                                     </ul>
                                 </div>
                             </div>
@@ -362,19 +707,21 @@
                     <div class="relative mb-12 fade-in">
                         <div class="flex items-center">
                             <div class="w-1/2 pr-8 text-right">
-                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                                        <li>Developed and maintained multiple web applications</li>
+                                <div class="timeline-content p-6 rounded-lg">
+                                    <ul class="list-disc list-inside text-white/90 space-y-2">
+                                        <li>Developed and maintained multiple applications</li>
+                                        <li>Mentored junior developers and conducted code reviews</li>
                                         <li>Collaborated with cross-functional teams</li>
                                         <li>Optimized application performance</li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot">
+                            </div>
                             <div class="w-1/2 pl-8">
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Web Developer</h3>
-                                <p class="text-primary font-semibold">Previous Company</p>
-                                <p class="text-gray-600 dark:text-gray-300">2020 - 2022</p>
+                                <h3 class="text-xl font-bold text-white">Senior Developer & Team Leader</h3>
+                                <p class="text-white/90 font-semibold">METATEAM MYANMAR Co.,Ltd</p>
+                                <p class="text-white/80">Oct 2020 - Jul 2023</p>
                             </div>
                         </div>
                     </div>
@@ -383,15 +730,16 @@
                     <div class="relative fade-in">
                         <div class="flex items-center">
                             <div class="w-1/2 pr-8 text-right">
-                                <h3 class="text-xl font-bold text-gray-800 dark:text-white">Junior Developer</h3>
-                                <p class="text-primary font-semibold">First Company</p>
-                                <p class="text-gray-600 dark:text-gray-300">2018 - 2020</p>
+                                <h3 class="text-xl font-bold text-white">Junior Developer</h3>
+                                <p class="text-white/90 font-semibold">METATEAM MYANMAR Co.,Ltd</p>
+                                <p class="text-white/80">Feb 2019 - Sep 2020</p>
                             </div>
-                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white dark:border-gray-800"></div>
+                            <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot">
+                            </div>
                             <div class="w-1/2 pl-8">
-                                <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-lg shadow-md">
-                                    <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                                        <li>Assisted in developing and maintaining websites</li>
+                                <div class="timeline-content p-6 rounded-lg">
+                                    <ul class="list-disc list-inside text-white/90 space-y-2">
+                                        <li>Assisted in developing and maintaining Projects</li>
                                         <li>Learned and implemented new technologies</li>
                                         <li>Participated in team projects and meetings</li>
                                     </ul>
@@ -405,7 +753,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
+    <section id="projects" class="py-20 background-alt">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">My Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -414,7 +762,8 @@
                     <img src="https://placehold.co/600x400" alt="Project 1" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
+                            features.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">React</span>
                             <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Node.js</span>
@@ -429,7 +778,8 @@
                     <img src="https://placehold.co/600x400" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
+                            features.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Vue.js</span>
                             <span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm">Firebase</span>
@@ -444,7 +794,8 @@
                     <img src="https://placehold.co/600x400" alt="Project 3" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
-                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key features.</p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
+                            features.</p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm">Python</span>
                             <span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm">Django</span>
@@ -458,32 +809,36 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="skills" class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Skills & Technologies</h2>
+            <h2 class="text-4xl font-bold text-center mb-12 text-white">Skills & Technologies</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 <!-- Skill Card 1 -->
-                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                <div
+                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
                     <i class="fab fa-html5 text-4xl text-orange-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">HTML5</h3>
+                    <h3 class="text-lg font-semibold text-white">HTML5</h3>
                 </div>
 
                 <!-- Skill Card 2 -->
-                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                <div
+                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
                     <i class="fab fa-css3-alt text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">CSS3</h3>
+                    <h3 class="text-lg font-semibold text-white">CSS3</h3>
                 </div>
 
                 <!-- Skill Card 3 -->
-                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                <div
+                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
                     <i class="fab fa-js text-4xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">JavaScript</h3>
+                    <h3 class="text-lg font-semibold text-white">JavaScript</h3>
                 </div>
 
                 <!-- Skill Card 4 -->
-                <div class="skill-card bg-white dark:bg-gray-700 p-6 rounded-xl shadow-md fade-in">
+                <div
+                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
                     <i class="fab fa-react text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">React</h3>
+                    <h3 class="text-lg font-semibold text-white">React</h3>
                 </div>
 
                 <!-- Add more skill cards as needed -->
@@ -492,25 +847,46 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20">
+    <section id="contact" class="py-20 background-alt">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white">Get In Touch</h2>
             <div class="max-w-2xl mx-auto">
-                <form class="space-y-6 fade-in">
+                <form class="space-y-6 fade-in" onsubmit="sendEmail(event)">
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <label for="name"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                        <input type="text" id="name" name="name" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white h-10">
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <label for="email"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white h-10">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
-                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"></textarea>
+                        <label for="message"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Message</label>
+                        <textarea id="message" name="message" rows="4" required
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white h-40"></textarea>
                     </div>
-                    <button type="submit" class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Send Message</button>
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Send
+                        Message</button>
                 </form>
+                <script>
+                    function sendEmail(e) {
+                        e.preventDefault();
+
+                        const name = document.getElementById('name').value;
+                        const email = document.getElementById('email').value;
+                        const message = document.getElementById('message').value;
+
+                        const mailtoLink = `mailto:theinnaingoo.official@gmail.com?subject=Portfolio Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
+
+                        window.location.href = mailtoLink;
+                    }
+                </script>
             </div>
         </div>
     </section>
@@ -520,28 +896,33 @@
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-4">
                 <!-- LinkedIn -->
-                <a href="YOUR_LINKEDIN_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-linkedin text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#0077B5] transition-colors"></i>
+                <a href="https://www.linkedin.com/in/thein-naing-oo/" target="_blank" class="social-link group">
+                    <i
+                        class="fab fa-linkedin text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#0077B5] transition-colors"></i>
                     <span class="social-tooltip">LinkedIn</span>
                 </a>
                 <!-- Facebook -->
-                <a href="YOUR_FACEBOOK_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-facebook text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#1877F2] transition-colors"></i>
+                <a href="https://www.facebook.com/thein.ny.oo.96" target="_blank" class="social-link group">
+                    <i
+                        class="fab fa-facebook text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#1877F2] transition-colors"></i>
                     <span class="social-tooltip">Facebook</span>
                 </a>
                 <!-- WhatsApp -->
-                <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="social-link group">
-                    <i class="fab fa-whatsapp text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#25D366] transition-colors"></i>
+                <a href="https://wa.me/66990032166" target="_blank" class="social-link group">
+                    <i
+                        class="fab fa-whatsapp text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#25D366] transition-colors"></i>
                     <span class="social-tooltip">WhatsApp</span>
                 </a>
                 <!-- LINE -->
-                <a href="YOUR_LINE_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-line text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#00B900] transition-colors"></i>
+                <a href="https://line.me/R/ti/p/zannore" target="_blank" class="social-link group">
+                    <i
+                        class="fab fa-line text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#00B900] transition-colors"></i>
                     <span class="social-tooltip">LINE</span>
                 </a>
                 <!-- Instagram -->
-                <a href="YOUR_INSTAGRAM_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-instagram text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#E4405F] transition-colors"></i>
+                <a href="https://www.instagram.com/thein_naing_00/" target="_blank" class="social-link group">
+                    <i
+                        class="fab fa-instagram text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#E4405F] transition-colors"></i>
                     <span class="social-tooltip">Instagram</span>
                 </a>
             </div>
@@ -553,10 +934,40 @@
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        // Function to set theme
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark');
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        // Theme toggle click handler
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            body.classList.toggle('light');
+            const isDark = body.classList.contains('dark');
+            setTheme(isDark ? 'light' : 'dark');
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
         });
 
         // Enhanced Intersection Observer for animations
@@ -597,7 +1008,7 @@
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Gallery Filter
             const filters = document.querySelectorAll('.gallery-filter');
             const items = document.querySelectorAll('.gallery-item');
@@ -640,4 +1051,5 @@
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 </body>
+
 </html>
