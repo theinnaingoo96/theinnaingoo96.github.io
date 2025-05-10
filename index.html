@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg"/>
     <title>Thein's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -68,6 +69,10 @@
             bottom: 0;
             background: linear-gradient(135deg, rgba(243, 153, 119, 0.9), rgba(243, 153, 119, 0));
             z-index: 1;
+        }
+
+        .dark #home::before {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0));
         }
 
         #home>* {
@@ -164,7 +169,7 @@
 
         .skill-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
         .project-card {
@@ -294,7 +299,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.7));
+            /* background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.7)); */
+            background: linear-gradient(295deg, rgb(56 22 9 / 95%), rgb(203 128 100 / 55%));
             z-index: 1;
         }
 
@@ -374,18 +380,73 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            background: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
         }
 
-        #theme-toggle:hover {
-            transform: scale(1.1);
+        #theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0d409b;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            left: 5px;
         }
 
         #theme-toggle .theme-icon {
-            transition: all 0.3s ease;
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: #fff;
+            font-size: 14px;
         }
 
-        #theme-toggle:hover .theme-icon {
-            transform: rotate(360deg);
+        #theme-toggle .sun-icon {
+            right: 8px;
+            opacity: 0;
+            transform: translateX(20px) rotate(90deg);
+        }
+
+        #theme-toggle .moon-icon {
+            left: 8px;
+            opacity: 1;
+            transform: translateX(0) rotate(0deg);
+        }
+
+        /* Light mode styles */
+        body.light #theme-toggle {
+            background: #f39977;
+        }
+
+        body.light #theme-toggle::before {
+            left: calc(100% - 25px);
+            background: #9b0123;
+        }
+
+        body.light #theme-toggle .sun-icon {
+            opacity: 1;
+            transform: translateX(0) rotate(0deg);
+        }
+
+        body.light #theme-toggle .moon-icon {
+            opacity: 0;
+            transform: translateX(-20px) rotate(-90deg);
+        }
+
+        /* Hover effects */
+        #theme-toggle:hover::before {
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        body.light #theme-toggle:hover::before {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         /* Delimiter Animations */
@@ -451,6 +512,10 @@
             content: '';
         }
 
+        .dark #education::before {
+            background: #1a1a1a;
+        }
+
         /* Education Section with Background */
         /* #education {
             background-color: #ffffff;
@@ -473,6 +538,320 @@
         .dark #education::before {
             display: none;
         } */
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        /* Mobile Navigation Styles */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            position: relative;
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dark .hamburger {
+            background: rgba(17, 24, 39, 0.1);
+        }
+
+        .hamburger:hover {
+            background: rgba(243, 153, 119, 0.2);
+            transform: scale(1.05);
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 20px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            left: 10px;
+        }
+
+        .dark .hamburger span {
+            background: #ffffff;
+        }
+
+        .hamburger span:nth-child(1) { 
+            top: 14px;
+            transform-origin: left center;
+        }
+        
+        .hamburger span:nth-child(2) { 
+            top: 20px;
+            transform-origin: left center;
+        }
+        
+        .hamburger span:nth-child(3) { 
+            top: 26px;
+            transform-origin: left center;
+        }
+
+        .hamburger.active {
+            background: rgba(243, 153, 119, 0.2);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 14px;
+            left: 10px;
+            width: 20px;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            width: 0;
+            opacity: 0;
+            left: 10px;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 26px;
+            left: 10px;
+            width: 20px;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark .mobile-menu {
+            background: rgba(17, 24, 39, 0.95);
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .mobile-menu.active .mobile-menu-items {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-item {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1a1a1a;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .dark .mobile-menu-item {
+            color: #ffffff;
+        }
+
+        .mobile-menu-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f39977;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .mobile-menu-item:hover {
+            color: #f39977;
+            transform: scale(1.1);
+        }
+
+        .mobile-menu-item:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Project Modal Styles */
+        .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            margin: auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .project-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .dark .modal-header {
+            border-bottom-color: #333;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .dark .modal-close {
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #f39977;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(90vh - 200px);
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .project-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .project-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1rem;
+            background: #f39977;
+            color: white;
+            border-radius: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-link {
+            padding: 0.75rem 1.5rem;
+            background: #f39977;
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            background: #e88a68;
+            transform: translateY(-2px);
+        }
+
+        .text-primary {
+            color: #e88a68;
+        }
     </style>
 </head>
 
@@ -482,7 +861,7 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">Thein Naing Oo</a>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex space-x-8 nav-links">
                     <a href="#home" class="nav-link text-gray-600 dark:text-gray-300">Home</a>
                     <a href="#about" class="nav-link text-gray-600 dark:text-gray-300">About</a>
                     <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300">Projects</a>
@@ -490,14 +869,32 @@
                     <a href="photography.html" class="nav-link text-gray-600 dark:text-gray-300">Photography</a>
                     <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
                 </div>
-                <button id="theme-toggle"
-                    class="p-2 rounded-lg bg-gray-200/80 dark:bg-gray-700/80 backdrop-blur-sm border border-gray-300/50 dark:border-gray-600/50">
-                    <i class="fas fa-sun theme-icon text-yellow-500 dark:hidden"></i>
-                    <i class="fas fa-moon theme-icon text-blue-300 hidden dark:block"></i>
-                </button>
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg">
+                        <i class="fas fa-sun theme-icon sun-icon"></i>
+                        <i class="fas fa-moon theme-icon moon-icon"></i>
+                    </button>
+                    <div class="hamburger md:hidden">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-items">
+            <a href="#home" class="mobile-menu-item">Home</a>
+            <a href="#about" class="mobile-menu-item">About</a>
+            <a href="#projects" class="mobile-menu-item">Projects</a>
+            <a href="#skills" class="mobile-menu-item">Skills</a>
+            <a href="photography.html" class="mobile-menu-item">Photography</a>
+            <a href="#contact" class="mobile-menu-item">Contact</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-20">
@@ -545,20 +942,20 @@
                 </a>
                 <div class="relative group flex items-center justify-center">
                     <button
-                        class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center">
+                        class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center" style="width: 100%;">
                         <i class="fas fa-file-alt mr-2"></i>
                         Resume
                         <i class="fas fa-chevron-down ml-2 text-sm"></i>
                     </button>
                     <div
-                        class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                        class="absolute left-1/2 transform -translate-x-1/2 mt-2 w-48 bg-white dark:bg-gray rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                         <a href="disc/resume.pdf" target="_blank"
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">
+                            class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-t-lg">
                             <i class="fas fa-eye mr-2"></i>
                             View
                         </a>
                         <a href="disc/resume.pdf" download
-                            class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-b-lg">
+                            class="block px-4 py-2 text-primary hover:bg-gray-100 rounded-b-lg">
                             <i class="fas fa-download mr-2"></i>
                             Download
                         </a>
@@ -613,8 +1010,9 @@
                                 <p class="text-gray-600 font-semibold">University of Computer Studies, Yangon</p>
                                 <p class="text-gray-600">2015 - 2019</p>
                             </div>
+                            <!-- <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot"> -->
                             <div
-                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white/80">
+                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot bg-primary border-4 border-white/80">
                             </div>
                             <div class="w-1/2 pl-8">
                                 <div
@@ -643,8 +1041,9 @@
                                     </ul>
                                 </div>
                             </div>
+                            <!-- <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot"> -->
                             <div
-                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-white/80">
+                                class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot bg-primary border-4 border-white/80">
                             </div>
                             <div class="w-1/2 pl-8">
                                 <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">High School Education
@@ -812,36 +1211,66 @@
     <section id="skills" class="py-20">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-12 text-white">Skills & Technologies</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Skill Card 1 -->
-                <div
-                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
-                    <i class="fab fa-html5 text-4xl text-orange-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-white">HTML5</h3>
-                </div>
+            <div class="relative">
+                <!-- Scroll Buttons -->
+                <button class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all" onclick="scrollSkills('left')">
+                    <i class="fas fa-chevron-left text-white"></i>
+                </button>
+                <button class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all" onclick="scrollSkills('right')">
+                    <i class="fas fa-chevron-right text-white"></i>
+                </button>
+                
+                <!-- Skills Container -->
+                <div class="skills-container overflow-x-auto scrollbar-hide flex gap-6 pb-4 px-4" style="scroll-behavior: smooth; padding-top: 10px;">
+                    <!-- React Native -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-react text-4xl text-[#61DAFB] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">React Native</h3>
+                        <p class="text-white/80 text-sm mt-2">Mobile App Development</p>
+                    </div>
 
-                <!-- Skill Card 2 -->
-                <div
-                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
-                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-white">CSS3</h3>
-                </div>
+                    <!-- ReactJS -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-react text-4xl text-[#61DAFB] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">ReactJS</h3>
+                        <p class="text-white/80 text-sm mt-2">Frontend Development</p>
+                    </div>
 
-                <!-- Skill Card 3 -->
-                <div
-                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
-                    <i class="fab fa-js text-4xl text-yellow-500 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-white">JavaScript</h3>
-                </div>
+                    <!-- Angular -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-angular text-4xl text-[#DD0031] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">Angular</h3>
+                        <p class="text-white/80 text-sm mt-2">Frontend Framework</p>
+                    </div>
 
-                <!-- Skill Card 4 -->
-                <div
-                    class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20">
-                    <i class="fab fa-react text-4xl text-blue-400 mb-4"></i>
-                    <h3 class="text-lg font-semibold text-white">React</h3>
-                </div>
+                    <!-- Ionic -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-ionic text-4xl text-[#3880FF] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">Ionic</h3>
+                        <p class="text-white/80 text-sm mt-2">Cross-platform Development</p>
+                    </div>
 
-                <!-- Add more skill cards as needed -->
+                    <!-- NodeJS -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-node-js text-4xl text-[#339933] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">NodeJS</h3>
+                        <p class="text-white/80 text-sm mt-2">Backend Development</p>
+                    </div>
+
+                    <!-- Express -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fas fa-server text-4xl text-[#000000] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">Express</h3>
+                        <p class="text-white/80 text-sm mt-2">Web Framework</p>
+                    </div>
+
+                    <!-- NextJS -->
+                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                        <i class="fab fa-react text-4xl text-[#000000] mb-4"></i>
+                        <h3 class="text-lg font-semibold text-white">NextJS</h3>
+                        <p class="text-white/80 text-sm mt-2">React Framework</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -892,7 +1321,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-100 dark:bg-gray-900 py-8">
+    <footer class="background-alt py-8">
         <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-4">
                 <!-- LinkedIn -->
@@ -929,6 +1358,39 @@
             <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Thein Naing Oo. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Project Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-2xl font-bold" id="modalTitle">Project Title</h3>
+                <button class="modal-close" onclick="closeProjectModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="project-gallery" id="modalGallery">
+                    <!-- Images will be added dynamically -->
+                </div>
+                <div class="tech-stack" id="modalTechStack">
+                    <!-- Tech stack badges will be added dynamically -->
+                </div>
+                <p class="text-gray-600 dark:text-gray-300" id="modalDescription">
+                    <!-- Project description will be added dynamically -->
+                </p>
+                <div class="project-links">
+                    <a href="#" class="project-link" id="modalDemoLink" target="_blank">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                    <a href="#" class="project-link" id="modalGithubLink" target="_blank">
+                        <i class="fab fa-github"></i>
+                        View Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Theme Toggle
@@ -1044,6 +1506,154 @@
             imagesLoaded(grid).on('progress', () => {
                 masonry.layout();
             });
+        });
+
+        function scrollSkills(direction) {
+            const container = document.querySelector('.skills-container');
+            const scrollAmount = 300; // Adjust this value to control scroll distance
+            
+            if (direction === 'left') {
+                container.scrollLeft -= scrollAmount;
+            } else {
+                container.scrollLeft += scrollAmount;
+            }
+        }
+
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target) && mobileMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Project Modal Functions
+        const projectModal = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalGallery = document.getElementById('modalGallery');
+        const modalTechStack = document.getElementById('modalTechStack');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalDemoLink = document.getElementById('modalDemoLink');
+        const modalGithubLink = document.getElementById('modalGithubLink');
+
+        // Sample project data (replace with your actual projects)
+        const projects = {
+            'project1': {
+                title: 'E-Commerce Platform',
+                images: [
+                    'https://placehold.co/600x400',
+                    'https://placehold.co/600x400',
+                    'https://placehold.co/600x400'
+                ],
+                techStack: ['React', 'Node.js', 'MongoDB', 'Express'],
+                description: 'A full-featured e-commerce platform with user authentication, product management, shopping cart, and payment integration. Built with modern web technologies and following best practices for scalability and performance.',
+                demoLink: '#',
+                githubLink: '#'
+            },
+            'project2': {
+                title: 'Task Management App',
+                images: [
+                    'https://placehold.co/600x400',
+                    'https://placehold.co/600x400'
+                ],
+                techStack: ['Vue.js', 'Firebase', 'Tailwind CSS'],
+                description: 'A collaborative task management application with real-time updates, team collaboration features, and intuitive drag-and-drop interface. Includes task assignment, progress tracking, and deadline management.',
+                demoLink: '#',
+                githubLink: '#'
+            },
+            'project3': {
+                title: 'Portfolio Website',
+                images: [
+                    'https://placehold.co/600x400',
+                    'https://placehold.co/600x400'
+                ],
+                techStack: ['HTML5', 'CSS3', 'JavaScript', 'Tailwind CSS'],
+                description: 'A responsive portfolio website showcasing my work and skills. Features smooth animations, dark mode support, and optimized performance.',
+                demoLink: '#',
+                githubLink: '#'
+            }
+        };
+
+        function openProjectModal(projectId) {
+            const project = projects[projectId];
+            if (!project) return;
+
+            modalTitle.textContent = project.title;
+            modalDescription.textContent = project.description;
+            modalDemoLink.href = project.demoLink;
+            modalGithubLink.href = project.githubLink;
+
+            // Clear and populate gallery
+            modalGallery.innerHTML = '';
+            project.images.forEach(image => {
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = project.title;
+                modalGallery.appendChild(img);
+            });
+
+            // Clear and populate tech stack
+            modalTechStack.innerHTML = '';
+            project.techStack.forEach(tech => {
+                const badge = document.createElement('span');
+                badge.className = 'tech-badge';
+                badge.textContent = tech;
+                modalTechStack.appendChild(badge);
+            });
+
+            projectModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            projectModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        projectModal.addEventListener('click', (e) => {
+            if (e.target === projectModal) {
+                closeProjectModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+                closeProjectModal();
+            }
+        });
+
+        // Update project cards to use the modal
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            const viewButton = card.querySelector('a[href="#"]');
+            if (viewButton) {
+                viewButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openProjectModal(`project${index + 1}`);
+                });
+            }
         });
     </script>
 
