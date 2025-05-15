@@ -1,68 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photography Gallery - My Portfolio</title>
+    <title>Photography Gallery - Thein's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            transition: background-color 0.3s ease;
-        }
-        .dark {
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-        .light {
             background-color: #ffffff;
             color: #1a1a1a;
         }
-        /* Navigation Styles */
+
         nav {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(8px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
-        .dark nav {
-            background-color: rgba(17, 24, 39, 0.95) !important;
-        }
-        /* Gallery Styles */
-        .gallery-filter {
-            background-color: rgba(243, 153, 119, 0.1);
-            color: #f39977;
-        }
-        .gallery-filter.active {
-            background-color: #f39977;
-            color: white;
-        }
-        .gallery-item {
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        .gallery-item.hidden {
-            opacity: 0;
-            display: none;
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-auto-rows: 10px;
-        }
-        .gallery-item {
-            grid-row-end: span 30;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+
         .nav-link {
             position: relative;
             font-weight: 500;
         }
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -73,231 +36,484 @@
             background-color: #f39977;
             transition: width 0.3s ease;
         }
+
         .nav-link:hover::after {
             width: 100%;
         }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .gallery-item img {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-enter {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .modal-leave {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        /* Custom scrollbar for aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .image-info-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .filter-button {
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        .filter-button.active {
+            background-color: #4f46e5;
+            /* Indigo-600 */
+            color: white;
+        }
+
+        .gallery-item-hide {
+            /* For smoother filtering, we can use opacity and then remove */
+            /* For now, direct removal is simpler */
+        }
     </style>
 </head>
-<body class="light">
-    <!-- Navigation -->
+
+<body class="antialiased text-gray-800">
+
+    <!-- <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-3xl font-bold text-center text-gray-700">My Photo Collection</h1>
+        </div>
+    </header> -->
+
     <nav class="fixed w-full z-50 top-0">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-gray-800 dark:text-white">Portfolio</a>
+                <a href="index.html" class="text-2xl font-bold text-gray-800">Thein Naing Oo</a>
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex space-x-8">
-                    <a href="index.html#home" class="nav-link text-gray-600 dark:text-gray-300">Home</a>
-                    <a href="index.html#about" class="nav-link text-gray-600 dark:text-gray-300">About</a>
-                    <a href="index.html#projects" class="nav-link text-gray-600 dark:text-gray-300">Projects</a>
-                    <a href="index.html#skills" class="nav-link text-gray-600 dark:text-gray-300">Skills</a>
-                    <a href="index.html#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
+                    <a href="index.html#home" class="nav-link text-gray-600">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-600">About</a>
+                    <a href="index.html#projects" class="nav-link text-gray-600">Projects</a>
+                    <a href="index.html#skills" class="nav-link text-gray-600">Skills</a>
+                    <a href="index.html#contact" class="nav-link text-gray-600">Contact</a>
                 </div>
-                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700">
-                    <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
-                    <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                    <i class="fas fa-bars text-gray-600 text-xl"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Photography Gallery Section -->
-    <section class="pt-32 pb-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl font-bold text-center mb-4 text-gray-800 dark:text-white">Photography Gallery</h1>
-            <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">Capturing moments through my lens. Here's a collection of my favorite photographs.</p>
-            
-            <!-- Gallery Filter -->
-            <div class="flex justify-center space-x-4 mb-8">
-                <button class="gallery-filter active px-4 py-2 rounded-full text-sm font-medium transition-colors" data-filter="all">All</button>
-                <button class="gallery-filter px-4 py-2 rounded-full text-sm font-medium transition-colors" data-filter="nature">Nature</button>
-                <button class="gallery-filter px-4 py-2 rounded-full text-sm font-medium transition-colors" data-filter="portrait">Portrait</button>
-                <button class="gallery-filter px-4 py-2 rounded-full text-sm font-medium transition-colors" data-filter="street">Street</button>
-            </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-6">
+        <div class="flex justify-between items-center mb-8">
+            <a href="index.html" class="text-2xl font-bold text-gray-800">Portfolio</a>
+            <button id="close-menu" class="p-2 rounded-lg hover:bg-gray-100">
+                <i class="fas fa-times text-gray-600 text-xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-4">
+            <a href="index.html#home" class="nav-link text-gray-600 py-2">Home</a>
+            <a href="index.html#about" class="nav-link text-gray-600 py-2">About</a>
+            <a href="index.html#projects" class="nav-link text-gray-600 py-2">Projects</a>
+            <a href="index.html#skills" class="nav-link text-gray-600 py-2">Skills</a>
+            <a href="index.html#contact" class="nav-link text-gray-600 py-2">Contact</a>
+        </div>
+    </div>
 
-            <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 gallery-grid">
-                <!-- Nature Photos -->
-                <div class="gallery-item nature fade-in" data-category="nature">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="img/gallery/thai1.png" alt="Mountain Sunrise" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Mountain Sunrise</h3>
-                                <p class="text-sm">Nature Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item nature fade-in" data-category="nature">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="img/gallery/ygn_city_hall.png" alt="Forest Stream" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Forest Stream</h3>
-                                <p class="text-sm">Nature Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item nature fade-in" data-category="nature">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="img/gallery/cloud1.png" alt="Mountain Lake" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Mountain Lake</h3>
-                                <p class="text-sm">Nature Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Portrait Photos -->
-                <div class="gallery-item portrait fade-in" data-category="portrait">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="img/gallery/cafe_portriate.png" alt="Portrait Study" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Portrait Study</h3>
-                                <p class="text-sm">Portrait Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item portrait fade-in" data-category="portrait">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Urban Portrait" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Urban Portrait</h3>
-                                <p class="text-sm">Portrait Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item portrait fade-in" data-category="portrait">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb" alt="Studio Portrait" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Studio Portrait</h3>
-                                <p class="text-sm">Portrait Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Urban Photos -->
-                <div class="gallery-item urban fade-in" data-category="urban">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000" alt="City Lights" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">City Lights</h3>
-                                <p class="text-sm">Urban Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item urban fade-in" data-category="urban">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df" alt="City Architecture" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">City Architecture</h3>
-                                <p class="text-sm">Urban Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gallery-item urban fade-in" data-category="urban">
-                    <div class="relative overflow-hidden rounded-lg group">
-                        <img src="https://images.unsplash.com/photo-1444723121867-7a241cacace9" alt="Urban Life" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div class="text-white text-center p-4">
-                                <h3 class="text-lg font-semibold mb-2">Urban Life</h3>
-                                <p class="text-sm">Urban Photography</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 pt-32">
+        <div id="filterContainer" class="flex flex-wrap justify-center gap-2 sm:gap-3">
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-100 dark:bg-gray-900 py-8">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="YOUR_LINKEDIN_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-linkedin text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#0077B5] transition-colors"></i>
-                </a>
-                <a href="YOUR_FACEBOOK_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-facebook text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#1877F2] transition-colors"></i>
-                </a>
-                <a href="https://wa.me/YOUR_PHONE_NUMBER" target="_blank" class="social-link group">
-                    <i class="fab fa-whatsapp text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#25D366] transition-colors"></i>
-                </a>
-                <a href="YOUR_LINE_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-line text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#00B900] transition-colors"></i>
-                </a>
-                <a href="YOUR_INSTAGRAM_URL" target="_blank" class="social-link group">
-                    <i class="fab fa-instagram text-2xl text-gray-600 dark:text-gray-400 group-hover:text-[#E4405F] transition-colors"></i>
-                </a>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        </div>
+    </main>
+
+    <div id="imageModal"
+        class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden modal-enter">
+        <div class="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button id="closeModalButton"
+                class="absolute top-4 right-4 text-gray-300 hover:text-white bg-gray-700 bg-opacity-50 rounded-full p-2 focus:outline-none transition-colors duration-200 z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="p-2 sm:p-4">
+                <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain rounded-md mb-4">
+                <div class="px-2 sm:px-4">
+                    <h3 id="modalTitle" class="text-2xl font-semibold text-gray-800 mb-2"></h3>
+                    <p id="modalDescription" class="text-gray-600 text-sm"></p>
+                </div>
             </div>
-            <p class="text-gray-600 dark:text-gray-400">&copy; 2025 Thein Naing Oo. All rights reserved.</p>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; <span id="currentYear"></span> Photography Gallery. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-1">Designed with Tailwind CSS</p>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script>
-        // Theme Toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
+        // --- Image Data (with categories) ---
+        const imageData = [
+            {
+                id: 1,
+                src: 'img/gallery/ygn_city_hall.png',
+                alt: 'a bird flying over Yangon City Hall',
+                title: 'Yangon City Hall',
+                description: 'A majestic bird soaring over the historic Yangon City Hall, capturing the perfect harmony between nature and colonial architecture.',
+                category: 'Architecture'
+            },
+            {
+                id: 2,
+                src: 'img/gallery/thai1.png',
+                alt: 'Monastery view in Thailand',
+                title: 'Thai Monastery',
+                description: 'The intricate details of a traditional Thai monastery, showcasing the rich cultural heritage and architectural beauty of Thailand.',
+                category: 'Architecture'
+            },
+            {
+                id: 3,
+                src: 'img/gallery/cloud1.png',
+                alt: 'forming Clouds in the sky',
+                title: 'Beauty of Clouds',
+                description: 'Dramatic cloud formations painting the sky with natural artistry, creating a mesmerizing pattern of light and shadow.',
+                category: 'Nature'
+            },
+            {
+                id: 4,
+                src: 'img/gallery/sky_train.png',
+                alt: 'sky train in Bangkok',
+                title: 'Sky Train',
+                description: 'The modern BTS Sky Train gliding through Bangkok\'s urban landscape, symbolizing the city\'s perfect blend of tradition and progress.',
+                category: 'Street Photography'
+            }, 
+            {
+                id: 5,
+                src: 'img/gallery/cafe_portrait.png',
+                alt: 'portrait',
+                title: 'Cafe Portrait',
+                description: 'A candid moment captured in a cozy cafe, where natural light and authentic emotions create a timeless portrait.',
+                category: 'Portrait'
+            },
+            {
+                id: 6,
+                src: 'img/gallery/nature1.png',
+                alt: 'sun light on Bougainvllea',
+                title: 'Scent of Bougainvillea',
+                description: 'Morning sunlight filtering through vibrant Bougainvillea flowers, creating a delicate dance of light and color in nature\'s garden.',
+                category: 'Nature'
+            },
+            {
+                id: 7,
+                src: 'img/gallery/ygn_archi1.png',
+                alt: 'The Colonial Building in Yangon',
+                title: 'The Colonial Building',
+                description: 'The timeless elegance of Yangon\'s colonial architecture, standing as a testament to the city\'s rich historical heritage.',
+                category: 'Architecture'
+            },
+            {
+                id: 8,
+                src: 'img/gallery/friend1.png',
+                alt: 'Moment between child monk and his friend',
+                title: 'Friendship',
+                description: 'A touching moment of friendship between a young monk and his companion, capturing the universal language of human connection.',
+                category: 'Street Photography'
+            },
+            {
+                id: 9,
+                src: 'img/gallery/coffee.png',
+                alt: 'Cafe Portrait',
+                title: 'Cafe Portrait',
+                description: 'A contemplative moment in a local cafe, where the warm ambiance and soft lighting create an intimate portrait.',
+                category: 'Portrait'
+            },
+            {
+                id: 10,
+                src: 'img/gallery/friend2.png',
+                alt: 'Friend',
+                title: 'Friendship',
+                description: 'A genuine moment of joy shared between friends, frozen in time through the lens of street photography.',
+                category: 'Street Photography'
+            },
+            {
+                id: 11,
+                src: 'img/gallery/beach1.png',
+                alt: 'Beach Scene',
+                title: 'Coastal Serenity',
+                description: 'The tranquil beauty of a beach landscape, where the meeting of land and sea creates a peaceful harmony.',
+                category: 'Landscape'
+            },
+            {
+                id: 12,
+                src: 'img/gallery/coffee1.png',
+                alt: 'Coffee',
+                title: 'Coffee Art',
+                description: 'The art of coffee making captured in a single frame, showcasing the beauty in everyday moments.',
+                category: 'Street Photography'
+            },
+            {
+                id: 13,
+                src: 'img/gallery/portriate1.png',
+                alt: 'Portrait',
+                title: 'Portrait',
+                description: 'A striking portrait that captures the essence of human emotion and character through careful composition and lighting.',
+                category: 'Portrait'
+            },
+            {
+                id: 14,
+                src: 'img/gallery/bangkok_city.png',
+                alt: 'Bangkok City',
+                title: 'Bangkok City',
+                description: 'The vibrant energy of Bangkok\'s cityscape, where modern skyscrapers meet traditional temples in a dynamic urban landscape.',
+                category: 'Landscape'
+            },
+            {
+                id: 15,
+                src: 'img/gallery/portriate2.png',
+                alt: 'Portrait',
+                title: 'Portrait',
+                description: 'A compelling portrait that tells a story through expression and composition, revealing the subject\'s unique character.',
+                category: 'Portrait'
+            },
+            {
+                id: 16,
+                src: 'img/gallery/nature2.png',
+                alt: 'Nature',
+                title: 'Natural Wonder',
+                description: 'A breathtaking view of nature\'s beauty, where every element comes together to create a perfect moment.',
+                category: 'Nature'
+            },
+            {
+                id: 17,
+                src: 'img/gallery/rain_flower.png',
+                alt: 'Rain on Flowers',
+                title: 'Rain on Flowers',
+                description: 'Delicate raindrops adorning flowers, creating a magical moment where nature\'s elements dance together.',
+                category: 'Nature'
+            },
+            {
+                id: 18,
+                src: 'img/gallery/thai2.png',
+                alt: 'Thai Street Scene',
+                title: 'Thai Street Scene',
+                description: 'The vibrant life of a Thai street, where local culture and daily activities create a rich tapestry of urban life.',
+                category: 'Street Photography'
+            },
+            {
+                id: 19,
+                src: 'img/gallery/street_view.png',
+                alt: 'Street View',
+                title: 'Urban Perspective',
+                description: 'A unique perspective of city life, capturing the rhythm and energy of urban streets through thoughtful composition.',
+                category: 'Street Photography'
+            },
+            {
+                id: 20,
+                src: 'img/gallery/cloud2.png',
+                alt: 'Clouds',
+                title: 'Sky Canvas',
+                description: 'Nature\'s masterpiece painted across the sky, where clouds create an ever-changing canvas of light and form.',
+                category: 'Nature'
+            }
+        ];
 
-        themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark');
-            body.classList.toggle('light');
-        });
+        // --- DOM Elements ---
+        const galleryGrid = document.getElementById('galleryGrid');
+        const imageModal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const currentYearSpan = document.getElementById('currentYear');
+        const filterContainer = document.getElementById('filterContainer');
 
-        // Gallery Filter
-        const filters = document.querySelectorAll('.gallery-filter');
-        const items = document.querySelectorAll('.gallery-item');
+        let currentFilter = 'All'; // To keep track of the active filter
 
-        filters.forEach(filter => {
-            filter.addEventListener('click', () => {
-                filters.forEach(f => f.classList.remove('active'));
-                filter.classList.add('active');
+        // --- Functions ---
 
-                const category = filter.getAttribute('data-filter');
+        // Function to create a gallery item
+        function createGalleryItem(image) {
+            const item = document.createElement('div');
+            item.className = 'gallery-item bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer relative group';
+            // Add data-category attribute for potential future use or more complex filtering
+            item.setAttribute('data-category', image.category);
+            item.innerHTML = `
+                <img src="${image.src}" alt="${image.alt}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found';">
+                <div class="absolute inset-0 flex flex-col justify-end p-4 image-info-overlay opacity-0 group-hover:opacity-100">
+                    <h3 class="text-white text-lg font-semibold">${image.title}</h3>
+                </div>
+            `;
+            item.addEventListener('click', () => openModal(image));
+            return item;
+        }
 
-                items.forEach(item => {
-                    if (category === 'all' || item.getAttribute('data-category') === category) {
-                        item.classList.remove('hidden');
-                    } else {
-                        item.classList.add('hidden');
-                    }
+        // Function to populate the gallery based on filter
+        function populateGallery(filter = 'All') {
+            galleryGrid.innerHTML = ''; // Clear existing items
+            const filteredImages = (filter === 'All') ? imageData : imageData.filter(image => image.category === filter);
+
+            if (filteredImages.length === 0) {
+                galleryGrid.innerHTML = `<p class="col-span-full text-center text-gray-500 text-xl py-10">No images found for "${filter}".</p>`;
+            } else {
+                filteredImages.forEach(image => {
+                    const galleryItem = createGalleryItem(image);
+                    galleryGrid.appendChild(galleryItem);
                 });
+            }
+            updateActiveFilterButton(filter);
+        }
+
+        // Function to open the modal
+        function openModal(image) {
+            modalImage.src = image.src;
+            modalImage.alt = image.alt;
+            modalImage.onerror = function () {
+                this.onerror = null;
+                this.src = 'https://placehold.co/1200x800/cccccc/ffffff?text=Large+Image+Not+Found';
+                modalTitle.textContent = "Image Unavailable";
+                modalDescription.textContent = "The requested image could not be loaded.";
+            };
+            modalTitle.textContent = image.title;
+            modalDescription.textContent = image.description;
+            imageModal.classList.remove('hidden', 'modal-leave');
+            imageModal.classList.add('modal-enter');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            imageModal.classList.remove('modal-enter');
+            imageModal.classList.add('modal-leave');
+            setTimeout(() => {
+                imageModal.classList.add('hidden');
+                modalImage.src = "";
+                modalImage.alt = "";
+                modalTitle.textContent = "";
+                modalDescription.textContent = "";
+            }, 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        // Function to create and populate filter buttons
+        function setupFilters() {
+            const categories = ['All', ...new Set(imageData.map(image => image.category))]; // Get unique categories, add 'All'
+
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.className = 'filter-button px-4 py-2 text-sm font-medium rounded-md bg-white text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm';
+                if (category === currentFilter) {
+                    button.classList.add('active');
+                }
+                button.addEventListener('click', () => {
+                    currentFilter = category;
+                    populateGallery(currentFilter);
+                });
+                filterContainer.appendChild(button);
             });
+        }
+
+        // Function to update the active state of filter buttons
+        function updateActiveFilterButton(activeFilter) {
+            const buttons = filterContainer.querySelectorAll('.filter-button');
+            buttons.forEach(button => {
+                if (button.textContent === activeFilter) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+
+        // --- Event Listeners ---
+        closeModalButton.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) {
+                closeModal();
+            }
         });
 
-        // Initialize Masonry Layout
-        const grid = document.querySelector('.gallery-grid');
-        const masonry = new Masonry(grid, {
-            itemSelector: '.gallery-item',
-            columnWidth: '.gallery-item',
-            percentPosition: true
-        });
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
 
-        // Update layout after images load
-        imagesLoaded(grid).on('progress', () => {
-            masonry.layout();
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setupFilters(); // Create filter buttons first
+            populateGallery(currentFilter); // Then populate gallery with the default filter
         });
     </script>
+
 </body>
-</html> 
+
+</html>

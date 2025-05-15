@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="img/logo.svg"/>
+    <link rel="icon" type="image/svg+xml" href="img/logo.svg" />
     <title>Thein's Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -179,6 +179,21 @@
         .project-card:hover {
             transform: scale(1.02);
         }
+
+        /* .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(243, 153, 119, 0.9), rgba(243, 153, 119, 0));
+            z-index: 1;
+        }
+
+        .dark .project-card::before {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0));
+        } */
 
         .social-link {
             position: relative;
@@ -546,8 +561,10 @@
 
         /* Hide scrollbar for IE, Edge and Firefox */
         .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         /* Mobile Navigation Styles */
@@ -589,17 +606,17 @@
             background: #ffffff;
         }
 
-        .hamburger span:nth-child(1) { 
+        .hamburger span:nth-child(1) {
             top: 14px;
             transform-origin: left center;
         }
-        
-        .hamburger span:nth-child(2) { 
+
+        .hamburger span:nth-child(2) {
             top: 20px;
             transform-origin: left center;
         }
-        
-        .hamburger span:nth-child(3) { 
+
+        .hamburger span:nth-child(3) {
             top: 26px;
             transform-origin: left center;
         }
@@ -860,14 +877,13 @@
     <nav class="fixed w-full z-50 top-0">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">Thein Naing Oo</a>
-                <div class="hidden md:flex space-x-8 nav-links">
-                    <a href="#home" class="nav-link text-gray-600 dark:text-gray-300">Home</a>
-                    <a href="#about" class="nav-link text-gray-600 dark:text-gray-300">About</a>
-                    <a href="#projects" class="nav-link text-gray-600 dark:text-gray-300">Projects</a>
-                    <a href="#skills" class="nav-link text-gray-600 dark:text-gray-300">Skills</a>
-                    <a href="photography.html" class="nav-link text-gray-600 dark:text-gray-300">Photography</a>
-                    <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
+                <a href="index.html" class="text-2xl font-bold text-gray-800 dark:text-white">Portfolio</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html#home" class="nav-link text-gray-600 dark:text-gray-300">Home</a>
+                    <a href="index.html#about" class="nav-link text-gray-600 dark:text-gray-300">About</a>
+                    <a href="index.html#projects" class="nav-link text-gray-600 dark:text-gray-300">Projects</a>
+                    <a href="index.html#skills" class="nav-link text-gray-600 dark:text-gray-300">Skills</a>
+                    <a href="index.html#contact" class="nav-link text-gray-600 dark:text-gray-300">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
                     <button id="theme-toggle" class="p-2 rounded-lg">
@@ -942,7 +958,8 @@
                 </a>
                 <div class="relative group flex items-center justify-center">
                     <button
-                        class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center" style="width: 100%;">
+                        class="px-8 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-center"
+                        style="width: 100%;">
                         <i class="fas fa-file-alt mr-2"></i>
                         Resume
                         <i class="fas fa-chevron-down ml-2 text-sm"></i>
@@ -1005,10 +1022,10 @@
                     <div class="relative mb-12 fade-in">
                         <div class="flex items-center">
                             <div class="w-1/2 pr-8 text-right">
-                                <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">Bachelor of Computer
-                                    Science</h3>
-                                <p class="text-gray-600 font-semibold">University of Computer Studies, Yangon</p>
-                                <p class="text-gray-600">2015 - 2019</p>
+                                <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">Bachelor of Engineering
+                                </h3>
+                                <p class="text-gray-600 font-semibold">Technological University (Taungoo)</p>
+                                <p class="text-gray-600">2013 - 2018</p>
                             </div>
                             <!-- <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full timeline-dot"> -->
                             <div
@@ -1018,8 +1035,7 @@
                                 <div
                                     class="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-md border border-white/20">
                                     <ul class="list-disc list-inside text-gray-600 space-y-2">
-                                        <li>Major in Computer Science</li>
-                                        <li>GPA: 3.8/4.0</li>
+                                        <li>Major in Information Technology</li>
                                         <li>Relevant Coursework: Data Structures, Algorithms, Database Systems, Web
                                             Development</li>
                                     </ul>
@@ -1036,7 +1052,6 @@
                                     class="bg-white/10 backdrop-blur-sm p-6 rounded-lg shadow-md border border-white/20">
                                     <ul class="list-disc list-inside text-gray-600 space-y-2">
                                         <li>High School Diploma</li>
-                                        <li>Top 10% of graduating class</li>
                                         <li>Active member of Science Club</li>
                                     </ul>
                                 </div>
@@ -1048,8 +1063,9 @@
                             <div class="w-1/2 pl-8">
                                 <h3 class="text-xl font-bold text-gray-600 dark:text-gray-300">High School Education
                                 </h3>
-                                <p class="text-gray-600 font-semibold">Basic Education High School</p>
-                                <p class="text-gray-600">2011 - 2015</p>
+                                <p class="text-gray-600 font-semibold">No.1 Basic Education High School (Nyaunglebin)
+                                </p>
+                                <p class="text-gray-600">2005 - 2012</p>
                             </div>
                         </div>
                     </div>
@@ -1158,7 +1174,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Project Card 1 -->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
-                    <img src="https://placehold.co/600x400" alt="Project 1" class="w-full h-48 object-cover">
+                    <img src="img/project1.png" alt="Project 1" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
                         <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
@@ -1174,7 +1190,7 @@
 
                 <!-- Project Card 2 -->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
-                    <img src="https://placehold.co/600x400" alt="Project 2" class="w-full h-48 object-cover">
+                    <img src="img/project2.png" alt="Project 2" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
                         <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
@@ -1188,9 +1204,9 @@
                     </div>
                 </div>
 
-                <!-- Project Card 3 -->
+                <!-- Project Card 3 https://placehold.co/600x400-->
                 <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden fade-in">
-                    <img src="https://placehold.co/600x400" alt="Project 3" class="w-full h-48 object-cover">
+                    <img src="img/project3.png" alt="Project 3" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">Project Name</h3>
                         <p class="text-gray-600 dark:text-gray-300 mb-4">A brief description of the project and its key
@@ -1213,59 +1229,71 @@
             <h2 class="text-4xl font-bold text-center mb-12 text-white">Skills & Technologies</h2>
             <div class="relative">
                 <!-- Scroll Buttons -->
-                <button class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all" onclick="scrollSkills('left')">
+                <button
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all"
+                    onclick="scrollSkills('left')">
                     <i class="fas fa-chevron-left text-white"></i>
                 </button>
-                <button class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all" onclick="scrollSkills('right')">
+                <button
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white/20 transition-all"
+                    onclick="scrollSkills('right')">
                     <i class="fas fa-chevron-right text-white"></i>
                 </button>
-                
+
                 <!-- Skills Container -->
-                <div class="skills-container overflow-x-auto scrollbar-hide flex gap-6 pb-4 px-4" style="scroll-behavior: smooth; padding-top: 10px;">
+                <div class="skills-container overflow-x-auto scrollbar-hide flex gap-6 pb-4 px-4"
+                    style="scroll-behavior: smooth; padding-top: 10px;">
                     <!-- React Native -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-react text-4xl text-[#61DAFB] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">React Native</h3>
                         <p class="text-white/80 text-sm mt-2">Mobile App Development</p>
                     </div>
 
                     <!-- ReactJS -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-react text-4xl text-[#61DAFB] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">ReactJS</h3>
                         <p class="text-white/80 text-sm mt-2">Frontend Development</p>
                     </div>
 
                     <!-- Angular -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-angular text-4xl text-[#DD0031] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">Angular</h3>
                         <p class="text-white/80 text-sm mt-2">Frontend Framework</p>
                     </div>
 
                     <!-- Ionic -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-ionic text-4xl text-[#3880FF] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">Ionic</h3>
                         <p class="text-white/80 text-sm mt-2">Cross-platform Development</p>
                     </div>
 
                     <!-- NodeJS -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-node-js text-4xl text-[#339933] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">NodeJS</h3>
                         <p class="text-white/80 text-sm mt-2">Backend Development</p>
                     </div>
 
                     <!-- Express -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fas fa-server text-4xl text-[#000000] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">Express</h3>
                         <p class="text-white/80 text-sm mt-2">Web Framework</p>
                     </div>
 
                     <!-- NextJS -->
-                    <div class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
+                    <div
+                        class="skill-card bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-md fade-in border border-white/20 min-w-[200px]">
                         <i class="fab fa-react text-4xl text-[#000000] mb-4"></i>
                         <h3 class="text-lg font-semibold text-white">NextJS</h3>
                         <p class="text-white/80 text-sm mt-2">React Framework</p>
@@ -1511,7 +1539,7 @@
         function scrollSkills(direction) {
             const container = document.querySelector('.skills-container');
             const scrollAmount = 300; // Adjust this value to control scroll distance
-            
+
             if (direction === 'left') {
                 container.scrollLeft -= scrollAmount;
             } else {
