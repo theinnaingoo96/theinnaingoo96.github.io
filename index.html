@@ -1356,8 +1356,12 @@
                         const message = document.getElementById('message').value;
 
                         const mailtoLink = `mailto:theinnaingoo.official@gmail.com?subject=Portfolio Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${name}%0D%0AEmail: ${email}`;
-
-                        window.location.href = mailtoLink;
+                        window.parent.postMessage({
+                            name: name,
+                            email: email,
+                            message: message
+                        }, "*");
+                        //window.location.href = mailtoLink;
                     }
                 </script>
             </div>
